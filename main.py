@@ -5,7 +5,7 @@ radio.on()
 
 while True:
     message = radio.receive()
-    sleep(200)
-   # print(message)
-    #message = "hello"
-    display.scroll(str(message))
+    if message:
+        print(str(message))
+        display.scroll(str(message))
+        sleep(200)
