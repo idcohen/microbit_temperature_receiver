@@ -2,24 +2,31 @@ from microbit import *
 import log
 import radio
 
-#log.delete()
 log.set_labels('temperature')
 
-radio.config(group=23)
+radio.config(group=55)
 radio.on()
-Filename = 'Temperature.txt'
-#@run_every()
 
-while True:
+Loop_ctrl = True
+while Loop_ctrl:
+    if button_b.was_pressed():
+        log.delete(full=True)
+        display.scroll('Log Cleared')
+
     message = radio.receive()
     if message:
         print(str(message))
         display.scroll(str(message))
-#        append_data(Filename, message)
         log.add({'temperature':message})
-        sleep(200)
+        
+    if button_a.was_pressed():    
+        Loop_ctrl = False   
 
-       # @run_every(s=30)
+
+
+
+        
+        # @run_every(s=30)
        # def log_data():
         #    log.add({
         #      'temperature': temperature(),
